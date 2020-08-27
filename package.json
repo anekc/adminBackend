@@ -1,0 +1,17 @@
+{
+    "name": "4-BackEnd-Server",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start:dev": "nodemon index.js"
+    },
+    "keywords": [],
+    "author": "Alejandro Arteaga",
+    "license": "ISC",
+    "dependencies": {
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "mongoose": "^5.10.0"
+    }
+}
