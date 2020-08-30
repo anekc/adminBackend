@@ -26,7 +26,11 @@ console.log(process.env);
 // Rutas
 
 app.use('/api/usuarios', require('./routes/usuariosRoutes'));
+app.use('/api/hospitales', require('./routes/hospitalesRoutes'));
+app.use('/api/medicos', require('./routes/medicosRoutes'));
+app.use('/api/todo', require('./routes/busqueda'));
 app.use('/api/login', require('./routes/auth'));
+app.use('/api/upload', require('./routes/upload'));
 
 
 
