@@ -5,7 +5,7 @@ const { response } = require('express');
 const bcrypt = require('bcryptjs');
 // importa el modelo creado en la DB
 const Usuario = require('../models/usuario');
-// capturamos los errores del middleware
+// capturamos los errores desde middleware
 const { validationResult } = require('express-validator');
 
 // GENERAR TOKEN
@@ -21,11 +21,11 @@ const getUsuarios = async(req, res) => {
 
     const [usuarios, total] = await Promise.all([
         Usuario
-        .find({}, 'nombre email role google')
+        .find({}, 'nombre email role google img')
         .skip(desde)
         .limit(5),
 
-        Usuario.count(),
+        Usuario.countDocuments(),
 
     ]);
 
