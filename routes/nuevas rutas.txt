@@ -2,4 +2,10 @@
 2.- se coloca la ruta en el index.js
 3.- Creamos las rutas para la api
 4.- se crea el controlador de las rutas
-5.- revisar tutas en postman
+5.- revisar rutas en postman
+
+
+// para google sign index
+npm install google-auth-library --save
+
+

@@ -21,6 +21,8 @@ app.use(express.json());
 
 //Base de datos iniciarla
 dbConnection();
+// DIRECTORIO PUBLICO
+app.use(express.static('public'));
 
 console.log(process.env);
 // Rutas
