@@ -1,5 +1,6 @@
 const { response } = require('express');
 const Hospital = require('../models/hospital');
+const hospital = require('../models/hospital');
 
 
 const getHospitales = async(req, res = response) => {
@@ -44,19 +45,67 @@ const crearHospital = async(req, res = response) => {
     });
 };
 
-const actualizarHospital = (req, res = response) => {
-    res.json({
-        ok: true,
-        msg: 'actualizar hospitales'
-    });
+const actualizarHospital = async(req, res = response) => {
+
+    const id = req.params.id;
+    const uid = req.uid;
+    try {
+
+        const hospitalDB = await Hospital.findById(id);
+        if (!hospitalDB) {
+            res.status(404).json({
+                ok: true,
+                msg: 'Hospital no encontrado por ID',
+                id
+            });
+        }
+        const cambiosHospital = {...req.body,
+            usuario: uid
+        };
+        const hospitalActualizado = await Hospital.findByIdAndUpdate(id, cambiosHospital, { new: true });
+        res.json({
+            ok: true,
+            msg: 'hospital actualizado',
+            hospitalDB: hospitalActualizado
+        });
+    } catch (error) {
+        console.log(error);
+
+        res.status(500).json({
+            ok: false,
+            msg: 'hable con el administrador'
+        });
+
+    }
+
 };
 
 
-const borrarHospital = (req, res = response) => {
-    res.json({
-        ok: true,
-        msg: 'borrar hospitales'
-    });
+const borrarHospital = async(req, res = response) => {
+
+    const uid = req.params.id;
+    try {
+
+        const hospitalDB = await Hospital.findById(uid);
+        if (!hospitalDB) {
+            return res.status(404).json({
+                ok: false,
+                msg: 'no existe un hospital con ese id'
+            });
+        }
+        await Hospital.findByIdAndDelete(uid);
+        res.json({
+            ok: true,
+            msg: 'Hospital Eliminado'
+        });
+    } catch (error) {
+        res.status(500).json({
+            ok: false,
+            msg: 'contacte al administrador del sistema'
+        });
+
+    }
+
 };
 
 
