@@ -107,8 +107,16 @@ const actualizarUsuario = async(req, res = response) => {
                 });
             }
         }
+        if (!usuariodb.google) {
+            campos.email = email;
 
-        campos.email = email;
+        } else if (usuariodb.email !== email) {
+            res.status(400).json({
+                ok: false,
+                msg: 'Usuario de google no puede cambiar su correo'
+            });
+        }
+
 
         const usuarioActualizado = await Usuario.findByIdAndUpdate(uid, campos, {
             new: true,
