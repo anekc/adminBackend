@@ -10,7 +10,8 @@ const {
     getMedico,
     crearMedico,
     actualizarMedico,
-    borrarMedico
+    borrarMedico,
+    getMedicoById
 } = require('../controllers/medicos');
 
 // importamos el middleware
@@ -37,6 +38,9 @@ router.put('/:id', [validarJWT,
 ], actualizarMedico);
 
 router.delete('/:id', validarJWT, borrarMedico);
+
+
+router.get('/:id', validarJWT, getMedicoById);
 
 
 
