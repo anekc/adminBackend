@@ -15,7 +15,7 @@ const {
 } = require('../controllers/medicos');
 
 // importamos el middleware
-const { validarJWT } = require('../middlewares/validar-jwt');
+const { validarJWT, validarAdminRole_OMismoUsuario } = require('../middlewares/validar-jwt');
 const { validarCampos } = require('../middlewares/validar-campos');
 
 

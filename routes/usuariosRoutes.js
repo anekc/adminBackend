@@ -9,7 +9,7 @@ const { Router } = require('express');
 
 const { getUsuarios, crearUsuarios, actualizarUsuario, borrarUsuario } = require('../controllers/usuarios');
 // importamos el middleware
-const { validarJWT } = require('../middlewares/validar-jwt');
+const { validarJWT, validarAdminRole, validarAdminRole_OMismoUsuario } = require('../middlewares/validar-jwt');
 const { validarCampos } = require('../middlewares/validar-campos');
 
 const router = Router();
@@ -25,15 +25,14 @@ router.post('/', [
     crearUsuarios);
 
 
-router.put('/:id', [validarJWT,
+router.put('/:id', [validarJWT, validarAdminRole_OMismoUsuario,
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),
     check('role', 'El rol es obligatorio').not().isEmpty(),
     check('email', 'El email es obligatorio').isEmail(),
     validarCampos
 ], actualizarUsuario);
 
-router.delete('/:id',
-    validarJWT,
+router.delete('/:id', [validarJWT, validarAdminRole],
     borrarUsuario);
 
 
