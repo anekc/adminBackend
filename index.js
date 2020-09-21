@@ -1,5 +1,6 @@
 // inicio de una app express
 const express = require('express');
+const path = require('path');
 // install ddotenv para las variables de entorno y
 // crear archivo .env
 require('dotenv').config();
@@ -33,6 +34,12 @@ app.use('/api/medicos', require('./routes/medicosRoutes'));
 app.use('/api/todo', require('./routes/busqueda'));
 app.use('/api/login', require('./routes/auth'));
 app.use('/api/upload', require('./routes/upload'));
+
+// servir la SPA
+
+app.get('*', (req, resp) => {
+    resp.sendFile(path.resolve(__dirname, 'public/index.html'));
+});
 
 
 
